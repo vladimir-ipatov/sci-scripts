@@ -1,0 +1,14 @@
+Source: sci-scripts
+Section: admin
+Priority: extra
+Maintainer: Vladimir Ipatov <vs@ipatov.net>
+Uploaders: Vladimir Ipatov <vs@ipatov.net>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.9.3
+Homepage: https://github.com/vladimir-ipatov/sci-scripts/
+Vcs-Browser: https://github.com/vladimir-ipatov/sci-scripts.git
+
+Package: sci-scripts
+Architecture: all
+Depends: ${misc:Depends}, udev
+Description: scripts for SkyCover Infrastructure virtualisation hosts

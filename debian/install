@@ -1,0 +1,2 @@
+config/drbd-sync-rate /etc/init.d
+sbin/* /usr/sbin

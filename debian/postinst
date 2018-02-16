@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Add drbd sync rate init script
+if [ -x "/etc/init.d/drbd-sync-rate" ]; then
+       update-rc.d drbd-sync-rate defaults >/dev/null
+fi
+

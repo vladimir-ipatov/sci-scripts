@@ -1,0 +1,16 @@
+debian/sci-scripts.default
+debian/sci-scripts.postinst.debhelper
+debian/sci-scripts.postrm.debhelper
+debian/sci-scripts.preinst.debhelper
+debian/sci-scripts.prerm.debhelper
+debian/sci-scripts.debhelper.log
+debian/sci-scripts.substvars
+debian/sci-scripts
+debian/files
+Makefile
+build-stamp
+install-stamp
+config.log
+config.status
+debian/debhelper-build-stamp
+build
