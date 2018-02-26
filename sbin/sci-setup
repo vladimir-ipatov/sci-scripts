@@ -500,7 +500,7 @@ test $? -eq 0 || (echo Something wrong on cluster init; exit 1)
 echo Tuning cluster
 gnt-cluster modify --hypervisor-parameters xen-pvm:bootloader_path=/usr/lib/xen-4.8/bin/pygrub,use_bootloader=True,bootloader_args='',kernel_path="/boot/vmlinuz-xenU",initrd_path="/boot/initrd.img-xenU",root_path=/dev/xvda1,xen_cmd=xl --reserved-lvs="$RESERVED_VOLS"
 test $? -eq 0 || (echo Something wrong on xen pvm modify; exit 1)
-gnt-cluster modify --hypervisor-parameters xen-hvm:use_localtime=true,kernel_path=/usr/lib/xen-4.8/boot/hvmloader,device_model=/usr/bin/qemu-system-x86_64,xen_cmd=xl
+gnt-cluster modify --hypervisor-parameters xen-hvm:use_localtime=true,kernel_path=/usr/lib/xen-4.8/boot/hvmloader,device_model=/usr/bin/qemu-system-x86_64,xen_cmd=xl,migration_mode=live
 test $? -eq 0 || (echo Something wrong on xen hvm modify; exit 1)
 gnt-cluster modify --ipolicy-bounds-specs=min:disk-size=0,cpu-count=1,disk-count=0,memory-size=1,nic-count=0,spindle-use=0/max:disk-size=4192256,cpu-count=128,disk-count=32,memory-size=1048576,nic-count=32,spindle-use=12
 test $? -eq 0 || (echo Something wrong on ipolicy modify; exit 1)
