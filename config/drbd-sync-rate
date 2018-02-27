@@ -13,7 +13,7 @@
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/usr/local/sbin/drbd-sync-rate-daemon
+DAEMON=/usr/sbin/drbd-sync-rate-daemon
 NAME=drbd-sync-rate
 PIDFILE=/var/run/$NAME.pid
 DESC="Wan Failover Script"
