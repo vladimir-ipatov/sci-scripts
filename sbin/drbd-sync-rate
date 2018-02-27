@@ -25,14 +25,15 @@ function get-info {
       return value
    }
    function call_drbd(disk,speed) {
-      system("'$drbd_command' /dev/drbd" disk " syncer -r " speed "K")
+      system("'$drbd_command' disk-options " disk " --resync-rate " speed)
    }
    BEGIN {
       K=1
       M=1024*K
       G=1024*M
       n=0
-   } /^[ 0-9]+:[ \t]+cs:SyncSource/ {
+   } 
+      /^[ 0-9]+:[ \t]+cs:SyncSource/ {
       #print $0
       col=split($0,str,"[ :]")
       j=0
@@ -54,11 +55,12 @@ function get-info {
       size_t[ksize]++
       sizes[ksize][size_t[ksize]]=name[n]
    } /finish: [0-9:]{3}+/ {
-      #printf("whith speed %s %s\n",$(NF-1),$(NF))
+   #   printf("whith speed %s %s\n",$(NF-1),$(NF))
       total_speed=total_speed+convert($(NF-1) $(NF),K)
    } END {
       for (s in sizes) {
 	sorted_sizes=sorted_sizes"\n"s
+	#print sorted_sizes
       }
       i=0
       while("echo \"" sorted_sizes " \"|sort -n"| getline a) {
@@ -104,7 +106,7 @@ function get-info {
    }'
 }
 #cat $drbdstate
-get-info |>/dev/null 2>/dev/null
+get-info #| >/dev/null 2>/dev/null
 #| while read i; do
-#   echo /sbin/drbdsetup /dev/drbd$(echo $i|awk '{print $1}') syncer -r $(echo $i| awk '{print $2}')
+#   echo /sbin/drbdsetup disk-options $(echo $i|awk '{print $1}') --resync-rate $(echo $i| awk '{print $2}')
 #done 
