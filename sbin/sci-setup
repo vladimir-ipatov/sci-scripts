@@ -625,6 +625,11 @@ EOF
   fi
 fi
 
+# disable second interface if requested
+if [ "$sci_lan_ip" = "none" ]; then
+  LANIF=""
+fi
+
 read NODE1_NETDEV NODE1_MASK <<EOF
 `check_ip $NODE1_IP`
 EOF
