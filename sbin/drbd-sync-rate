@@ -1,12 +1,11 @@
 #!/bin/bash
 
-drbdstate='/proc/drbd'
-#drbdstate='drbd.log'
-fullspeed='65M'
-minspeed='2M'
-maxspeed_count=1
-drbd_command='/sbin/drbdsetup'
-#drbd_command='echo'
+#read vars from config
+. /etc/sci/drbd-sync-rate
+
+if [[ $disabled == 'yes' ]]; then
+	exit 0;
+fi
 
 function get-info {
    cat $drbdstate | sed 's/finish/\n\tfinish/' | awk --use-lc-numeric -v fullspeed=$fullspeed -v minspeed=$minspeed -v maxspeed_count=$maxspeed_count '
