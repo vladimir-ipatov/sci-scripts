@@ -698,9 +698,16 @@ fi
 
 if [ -n "$NODE2_NAME" ]; then
   gnt-instance add -t drbd -o debian+sci -s 10g -B memory=512m --net=0:link=$NODE1_NETDEV,ip=$SCI_IP $LANIF -n $NODE1_NAME:$NODE2_NAME --no-name-check --no-ip-check $SCI_NAME
+  status=$?
 else
   echo "WARNING! Creating the service instance without fallback support. This is strongly not recommended for production use!"
   gnt-instance add -t plain -o debian+sci -s 10g -B memory=512m --net=0:link=$NODE1_NETDEV,ip=$SCI_IP $LANIF -n $NODE1_NAME --no-name-check --no-ip-check $SCI_NAME
+  status=$?
+fi
+
+if [ "$status" != "0" ]; then
+	echo "instance add finished with error. please fix errors, remove an instance (gnt-instance remove sci) and try again"
+	exit 1
 fi
 
 cat <<EOF >/etc/resolv.conf
