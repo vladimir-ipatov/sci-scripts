@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #read vars from config
-. /etc/sci/drbd-sync-rate
+. /etc/sci/drbd-sync-rate.conf
 
 if [[ $disabled == 'yes' ]]; then
 	exit 0;
