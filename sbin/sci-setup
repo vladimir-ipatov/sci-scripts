@@ -238,6 +238,24 @@ reloc_domain=`awk -v d="$DOMAIN_NAME" 'BEGIN{gsub("[.]","\\\\\\\\\\\\\\\\.",d);p
 sed -i 's/^(xend-relocation-hosts-allow .*/(xend-relocation-hosts-allow '"'^localhost$ ^$BASE_NAME[0-9]+\\\\\\\\.$reloc_domain\$')/" /etc/xen/xend-config.sxp
 service xen restart
 
+# lang and timezone choose
+echo "Current locale: $LOCALE"
+echo "Current timezone: $TIMEZONE"
+echo "If you want to change it, write \"yes\""
+echo "Otherwise press ENTER"
+read lang_set
+if [ "$lang_set" = "yes" ]; then
+  LANG=C dpkg-reconfigure locales
+  LANG=C dpkg-reconfigure tzdata
+  LOCALE=$(. /etc/default/locale;echo $LANG)
+  TIMEZONE=$(cat /etc/timezone)
+  echo $LOCALE
+  echo $TIMEZONE
+  sed -i 's/^LOCALE=.*/LOCALE='\"$LOCALE\"'/' /etc/sci/sci.conf
+  sed -i 's/^TIMEZONE=.*/TIMEZONE='\"`echo $TIMEZONE|sed 's/\//\\\\\//'`\"'/' /etc/sci/sci.conf
+fi
+
+
 if [ -z "$SINGLE_MODE" -a -z "$NODE2_IP" ]; then
   NODE2_IP=`echo $NODE1_IP|cut -d . -f 1-3`.12
 fi
