@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#args
+backboneip="$1"
+lanip="$2"
+clusterip=`cat /var/lib/ganeti/ssconf_master_ip`
+
+if (/bin/ping -W 1 -c 3 $backboneip > /dev/null 2>&1); then
+    1>&2 echo "master node pinged by backbone with ip $backboneip. abort master-failover"
+    exit 1
+fi
+
+if (/bin/ping -W 1 -c 3 $lanip > /dev/null 2>&1); then
+    1>&2 echo "master node pinged by lan with ip $lanip. abort master-failover"
+    exit 1
+fi
+
+if (/bin/ping -W 1 -c 3 $clusterip > /dev/null 2>&1); then
+    1>&2 echo "cluster ip is up and pinged: $clusterip. abort master-failover"
+    exit 1
+fi
+
+/usr/sbin/gnt-cluster master-failover --no-voting --yes-do-it

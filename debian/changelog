@@ -1,3 +1,9 @@
+sci-scripts (3.0-3) stretch; urgency=low
+
+  * add force-master-failover and force-start-masterd scripts
+
+ -- Vladimir Ipatov <vs@ipatov.net>  Wed, 16 Feb 2018 22:07:24 +0300
+
 sci-scripts (3.0-2) unstable; urgency=low
 
   * add timezone and locale choose in sci-setup cluster

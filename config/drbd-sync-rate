@@ -16,7 +16,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/sbin/drbd-sync-rate-daemon
 NAME=drbd-sync-rate
 PIDFILE=/var/run/$NAME.pid
-DESC="Wan Failover Script"
+DESC="DRBD Sync rate Script"
 
 unset TMPDIR
 

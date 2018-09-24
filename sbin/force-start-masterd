@@ -1,0 +1,9 @@
+#!/bin/bash
+
+clusterip=`cat /var/lib/ganeti/ssconf_master_ip`
+
+if (/bin/ping -W 1 -c 3 $clusterip > /dev/null 2>&1); then
+    1>&2 echo "cluster ip is up and pinged: $clusterip. abort masterd startup"
+    exit 1
+fi
+su - gnt-masterd -s /bin/bash -c "/usr/sbin/ganeti-masterd --no-voting --yes-do-it"
