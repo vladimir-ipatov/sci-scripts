@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#vars
+interfaces=/etc/network/interfaces
+
+cat $interfaces|awk 'f{print;f=0} /iface\ lan/{f=1}'|awk '/address/ {print $NF;exit}'|awk -F'/' '{print $1}'

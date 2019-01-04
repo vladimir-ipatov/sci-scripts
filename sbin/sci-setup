@@ -477,6 +477,7 @@ ff02::2 ip6-allrouters
 $CLUSTER_IP	$CLUSTER_NAME.$DOMAIN_NAME $CLUSTER_NAME
 # first nodes
 $NODE1_IP	$NODE1_NAME.$DOMAIN_NAME $NODE1_NAME
+$NODE1_LAN_IP	$NODE1_NAME-lan.$DOMAIN_NAME $NODE1_NAME-lan
 EOF
 
 if [ -z "$SINGLE_MODE" ]; then
@@ -535,6 +536,7 @@ echo "scweb $rapipasswd write" > /var/lib/ganeti/rapi/users
 if [ -e /opt/sci-web/sci_webinterface/settings.py ]; then
 	sed -i "s/scpassword/$rapipasswd/" /opt/sci-web/sci_webinterface/settings.py
 fi
+invoke-rc.d uwsgi restart
 
 
 # tuning lvm filter. if you don't use md, comment it
