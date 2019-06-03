@@ -1,0 +1,4 @@
+#!/bin/sh
+
+create-vnc-tokens
+websockify -D 9601 --target-config /etc/sci/vnc-tokens
