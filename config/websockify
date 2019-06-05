@@ -39,7 +39,7 @@ case "$1" in
 	;;
   stop)
 	log_begin_msg "Stopping $DESC: $NAME"
-	kill `cat $PIDFILE`
+	pkill -f python\ /usr/bin/websockify
 	log_end_msg $?
 	;;
   reload|force-reload)

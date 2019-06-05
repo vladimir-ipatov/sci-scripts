@@ -5,3 +5,10 @@ if [ -x "/etc/init.d/drbd-sync-rate" ]; then
        update-rc.d drbd-sync-rate defaults >/dev/null
 fi
 
+# Add websockify init script
+if [ -x "/etc/init.d/websockify" ]; then
+        update-rc.d websockify defaults >/dev/null
+        invoke-rc.d websockify stop||true
+        invoke-rc.d websockify start||true
+fi
+

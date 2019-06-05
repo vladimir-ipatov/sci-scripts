@@ -2,7 +2,7 @@
 
 config=/etc/sci/vnc-tokens
 echo '' > $config
-for i in `cat /etc/hosts|awk '{print $2}'|grep gnt[0-9]\\\.|awk -F'.' '{print $1}'`; do
+for i in `cat /etc/hosts|awk '{print $2}'|grep gnt[0-9]\\\.`; do
 	for j in `seq 11000 14999`; do
 		echo "$i-$j: $i:$j" >> $config
 	done

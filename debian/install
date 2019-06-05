@@ -1,3 +1,4 @@
 config/drbd-sync-rate.conf /etc/sci
 config/drbd-sync-rate /etc/init.d
+config/websockify /etc/init.d
 sbin/* /usr/sbin
