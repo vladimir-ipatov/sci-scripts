@@ -1,4 +1,4 @@
-sci-scripts (3.1) stretch; urgency=low
+sci-scripts (3.1-0) stretch; urgency=low
 
   * fix gnt-sardp and gnt-iostat for stretch, add gawk dependency
 
