@@ -10,5 +10,5 @@ Vcs-Browser: https://github.com/vladimir-ipatov/sci-scripts.git
 
 Package: sci-scripts
 Architecture: all
-Depends: ${misc:Depends}, websockify
+Depends: ${misc:Depends}, websockify, gawk
 Description: scripts for SkyCover Infrastructure virtualisation hosts
