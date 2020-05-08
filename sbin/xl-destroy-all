@@ -1,0 +1,2 @@
+#!/bin/bash
+for i in `xl list|awk 'NR > 2{print $1}'`; do xl destroy $i; done

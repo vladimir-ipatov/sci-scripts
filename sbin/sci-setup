@@ -500,11 +500,15 @@ if [ -n "$NODE1_LAN_IP" ]; then
   for_networks $NODE1_LAN_IP $NODE1_LAN_MASK $NODE1_LAN_NETDEV >>/etc/ganeti/networks
 fi
 
+# create vnc password
 vncpasswd=`pwgen -1`
 echo "Set random vnc password for cluster: $vncpasswd"
 echo $vncpasswd > /etc/ganeti/vnc-cluster-password
 chmod 640 /etc/ganeti/vnc-cluster-password
 chgrp gnt-daemons /etc/ganeti/vnc-cluster-password
+if [ -e /opt/sci-web/sci_webinterface/settings.py ]; then
+	sed -i "s/vncpassword/$vncpasswd/" /opt/sci-web/sci_webinterface/settings.py
+fi
 
 echo add sci repo in apt sources
 cp /root/sci-dev.list /etc/apt/sources.list.d
@@ -536,6 +540,13 @@ echo "scweb $rapipasswd write" > /var/lib/ganeti/rapi/users
 if [ -e /opt/sci-web/sci_webinterface/settings.py ]; then
 	sed -i "s/scpassword/$rapipasswd/" /opt/sci-web/sci_webinterface/settings.py
 fi
+# generati htpasswd file for mond
+touch /etc/sci/sci-mond.htpasswd
+chmod 600 /etc/sci/sci-mond.htpasswd
+chown www-data /etc/sci/sci-mond.htpasswd
+echo "$rapipasswd"|htpasswd -i -c /etc/sci/sci-mond.htpasswd sci-mond
+
+
 invoke-rc.d uwsgi restart
 
 
