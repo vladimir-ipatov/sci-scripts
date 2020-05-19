@@ -1,3 +1,9 @@
+sci-scripts (3.3-2) stretch; urgency=low
+
+  * set hypervisor root_path to empty
+
+ -- Vladimir Ipatov <vs@ipatov.net>  Wed, 16 Feb 2018 22:07:24 +0300
+
 sci-scripts (3.3-1) stretch; urgency=low
 
   * add vnc password setting sci-setup

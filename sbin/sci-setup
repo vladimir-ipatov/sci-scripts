@@ -521,7 +521,7 @@ gnt-cluster init --enabled-hypervisors=xen-pvm,xen-hvm --nic-parameters link=`ec
 test $? -eq 0 || (echo Something wrong on cluster init; exit 1)
 
 echo Tuning cluster
-gnt-cluster modify --hypervisor-parameters xen-pvm:bootloader_path=/usr/lib/xen-4.8/bin/pygrub,use_bootloader=True,bootloader_args='',kernel_path="/boot/vmlinuz-xenU",initrd_path="/boot/initrd.img-xenU",root_path=/dev/xvda1,xen_cmd=xl --reserved-lvs="$RESERVED_VOLS"
+gnt-cluster modify --hypervisor-parameters xen-pvm:bootloader_path=/usr/lib/xen-4.8/bin/pygrub,use_bootloader=True,bootloader_args='',kernel_path="/boot/vmlinuz-xenU",initrd_path="/boot/initrd.img-xenU",root_path='',xen_cmd=xl --reserved-lvs="$RESERVED_VOLS"
 test $? -eq 0 || (echo Something wrong on xen pvm modify; exit 1)
 gnt-cluster modify --hypervisor-parameters xen-hvm:use_localtime=true,kernel_path=/usr/lib/xen-4.8/boot/hvmloader,device_model=/usr/bin/qemu-system-x86_64,xen_cmd=xl,migration_mode=live
 test $? -eq 0 || (echo Something wrong on xen hvm modify; exit 1)
